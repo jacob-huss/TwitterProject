@@ -2,25 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
-    <title>Log in</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    <link rel="stylesheet" href="/custom.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="/custom.js"></script>
+    <title>Feed</title>
+    <div th:replace="/fragments/headlinks :: head-styles"></div>
+
 </head>
 
-    <body>
-        <div class="container">
-            <div th:replace="fragments/navbar"></div>
-            <h2>Tweets</h2>
-            <div th:each="tweet:${tweetList}">
-                <h5>@<span th:text="${tweet.user.username}"></span>
-                    <small><span th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"></span></small></h5>
-                <p th:utext="${tweet.message}"></p>
-    	    </div>
-        </div>
-    </body>
+<body>
+    <div class="container">
 
+        <!-- If no tweets in tweetList from tweetcontroller -->
+        <div th:if="${#lists.isEmpty(tweetList)}">
+      <h2>No Tweets</h2>
+    </div>
+
+
+    <!-- Styling for feed page fixed below -->
+      <div th:replace="fragments/navbar"></div>
+      <h2>Tweets</h2>
+      <div class="list-group" th:each="tweet:${tweetList}">
+					<div class="list-group-item list-group-item-action">
+						<div class="d-flex w-100 justify-content-between">
+              <!-- Fixed styling and coloring for feed page -->
+								<h5 class="mb-1" style="color: #00aced"><i class="fab fa-twitter"></i> @<span th:text="${tweet.user.username}"></span> </span> <span style="color: black;" th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"></span></h5>	
+						</div>
+							<p class="mb-1" th:utext="${tweet.message}"></p>
+					</div>
+				</div>
+      </div>
+    </div>
+  </body>
 </html>

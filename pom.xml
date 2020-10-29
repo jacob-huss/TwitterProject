@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tts</groupId>
-	<artifactId>techtalenttwitter</artifactId>
+	<artifactId>twitter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>techtalenttwitter</name>
+	<name>twitter</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -19,16 +19,18 @@
 	</properties>
 
 	<dependencies>
-	<dependency>
-        <groupId>org.thymeleaf.extras</groupId>
-        <artifactId>thymeleaf-extras-springsecurity4</artifactId>
-        <version>3.0.2.RELEASE</version>
-    </dependency>
-    <dependency>
-        <groupId>org.ocpsoft.prettytime</groupId>
-        <artifactId>prettytime</artifactId>
-        <version>4.0.1.Final</version>
-    </dependency>
+
+			<dependency>
+					<groupId>org.thymeleaf.extras</groupId>
+					<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+					<version>3.0.2.RELEASE</version>
+			</dependency>
+			<dependency>
+					<groupId>org.ocpsoft.prettytime</groupId>
+					<artifactId>prettytime</artifactId>
+					<version>4.0.1.Final</version>
+			</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -81,13 +83,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	
-   <dependency>
-     <groupId>javax</groupId>
-     <artifactId>javaee-api</artifactId>
-     <version>8.0.1</version>
-   </dependency>
- </dependencies>
+	</dependencies>
 
 	<build>
 		<plugins>

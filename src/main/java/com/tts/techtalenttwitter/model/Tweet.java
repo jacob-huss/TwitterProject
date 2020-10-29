@@ -21,7 +21,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Length;
 
-
 @Entity
 public class Tweet {
 
@@ -35,8 +34,10 @@ public class Tweet {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
 
-	// @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	// @JoinTable(name = "tweet_tag", joinColumns = @JoinColumn(name = "tweet_id"))
+	// @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
+	// CascadeType.MERGE })
+	// @JoinTable(name = "tweet_tag", joinColumns = @JoinColumn(name = "tweet_id"),
+	// inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	// private List<Tag> tags;
 
 	@NotEmpty(message = "Tweet cannot be empty")
@@ -46,48 +47,54 @@ public class Tweet {
 	@CreationTimestamp
 	private Date createdAt;
 
-	// Use the code below if your lombok is not working:
+	// JPA NEEDS EMPTY CONSTRUCTOR!~!
+	public Tweet() {
+	}
+
+	public Tweet(Long id, User user,
+			@NotEmpty(message = "Tweet cannot be empty") @Length(max = 280, message = "Tweet cannot have more than 280 characters") String message,
+			Date createdAt) {
+		this.id = id;
+		this.user = user;
+		this.message = message;
+		this.createdAt = createdAt;
+	}
+
 	public Long getId() {
-	return id;
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public User getUser() {
-	return user;
+		return user;
 	}
 
 	public void setUser(User user) {
-	this.user = user;
+		this.user = user;
 	}
 
-	// public List<Tag> getTags() {
-	// return tags;
-	// }
-
-	// public void setTags(List<Tag> tags) {
-	// this.tags = tags;
-	// }
-
 	public String getMessage() {
-	return message;
+		return message;
 	}
 
 	public void setMessage(String message) {
-	this.message = message;
+		this.message = message;
 	}
 
 	public Date getCreatedAt() {
-	return createdAt;
+		return createdAt;
 	}
 
 	public void setCreatedAt(Date createdAt) {
-	this.createdAt = createdAt;
+		this.createdAt = createdAt;
 	}
 
 	@Override
 	public String toString() {
-	return "Tweet [createdAt=" + createdAt + ", id=" + id + ", message=" +
-	message + ", user=" + user + "]";
+		return "Tweet [createdAt=" + createdAt + ", id=" + id + ", message=" + message + ", user=" + user + "]";
 	}
-	
 
 }
